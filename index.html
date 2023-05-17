@@ -36,6 +36,28 @@
 </a>
 <pre><code class="language-js"><span class="hl-2">import</span><span class="hl-0"> { </span><span class="hl-3">augmentV4</span><span class="hl-0"> } </span><span class="hl-2">from</span><span class="hl-0"> </span><span class="hl-1">&#39;yolo-augment&#39;</span><span class="hl-0">;</span><br/><br/><span class="hl-4">augmentV4</span><span class="hl-0">(</span><span class="hl-3">pathToDatasetFolder</span><span class="hl-0">);</span>
 </code></pre>
+
+<a href="#todos" id="todos" style="color: inherit; text-decoration: none;">
+  <h2>ToDos</h2>
+</a>
+<ul>
+<li>Add a website to visualize the operations in a single image (make a <code>demo/</code> folder at the root level and use <strong>vite</strong> to run a server)</li>
+</ul>
+<p>Add more augmentation types like:</p>
+<ul>
+<li>scale (positive and negative)</li>
+<li>blur</li>
+<li>Etc</li>
+</ul>
+<p>Always with the corresponding test.</p>
+<p>Most are straight forward operations in the image library! But labels need careful update.</p>
+
+<a href="#potential-additions" id="potential-additions" style="color: inherit; text-decoration: none;">
+  <h2>Potential additions</h2>
+</a>
+<ul>
+<li>Filters (by number of boxes for example, using fs.unlink to remove files and annotations that do not comply.)</li>
+</ul>
 <hr>
 <p><a href="./LICENSE">MIT</a></p>
 </div></div>
