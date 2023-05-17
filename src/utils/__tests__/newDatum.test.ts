@@ -2,8 +2,8 @@ import { Image } from 'image-js';
 
 import { type Datum, newDatum } from '../newDatum';
 
-const image = new Image(10, 10, {
-  data: new Uint8Array(10 * 10 * 4),
+const image = new Image(5, 5, {
+  data: new Uint8Array(5 * 5 * 3),
 });
 describe('newDatum', () => {
   it('should work', () => {
@@ -18,7 +18,7 @@ describe('newDatum', () => {
     expect(result).toEqual({
       newImageName: 'rc90_image.jpg',
       newImage: image.rotate(90),
-      newAnnotation: '9 1 9 1 1',
+      newAnnotation: '4,1,4,1,1',
     });
   });
 });

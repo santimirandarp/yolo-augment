@@ -19,7 +19,7 @@ export function newDatum({
   const fullWidth = image.width;
   let result: { newImage: Image; newNumericLabels: string[] };
   switch (augmentation) {
-    case 'rc90':
+    case 'rac90':
       result = {
         newImage: image.rotate(90),
         newNumericLabels: bbox.map(([x1, y1, x2, y2, c]) =>
@@ -27,7 +27,7 @@ export function newDatum({
         ),
       };
       break;
-    case 'rac90':
+    case 'rc90':
       result = {
         newImage: image.rotate(-90),
         newNumericLabels: bbox.map(([x1, y1, x2, y2, c]) =>
