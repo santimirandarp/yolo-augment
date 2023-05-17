@@ -1,7 +1,7 @@
 import { stat } from 'fs/promises';
 
 export async function checkPathExist(
-  dirs: string[]|string,
+  dirs: string[] | string,
   type: 'file' | 'directory',
 ) {
   if (typeof dirs === 'string') {

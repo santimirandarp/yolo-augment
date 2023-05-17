@@ -117,5 +117,5 @@ dist
 .DS_Store
 
 lib
-data/out
-data/outAll
+src/__tests__/out
+src/__tests__/outAll
