@@ -21,7 +21,7 @@ export function newDatum({
   switch (augmentation) {
     case 'rac90':
       result = {
-        newImage: image.rotate(90),
+        newImage: image.rotate(-90),
         newNumericLabels: bbox.map(([x1, y1, x2, y2, c]) =>
           [y1, fullWidth - x2, y2, fullWidth - x1, c].join(','),
         ),
@@ -29,7 +29,7 @@ export function newDatum({
       break;
     case 'rc90':
       result = {
-        newImage: image.rotate(-90),
+        newImage: image.rotate(90),
         newNumericLabels: bbox.map(([x1, y1, x2, y2, c]) =>
           [fullHeight - y2, x1, fullHeight - y1, x2, c].join(','),
         ),
@@ -40,10 +40,10 @@ export function newDatum({
         newImage: image.rotate(180),
         newNumericLabels: bbox.map(([x1, y1, x2, y2, c]) =>
           [
-            fullHeight - y2,
             fullWidth - x2,
-            fullHeight - y1,
+            fullHeight - y2,
             fullWidth - x1,
+            fullHeight - y1,
             c,
           ].join(','),
         ),
