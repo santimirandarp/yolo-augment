@@ -1,27 +1,15 @@
-import { Image, write } from 'image-js';
-import { basename, extname, join, resolve } from 'path';
-import { readdir, stat } from 'fs/promises';
-import { Augmentation } from './types';
+import { Image } from 'image-js';
 
-function checkDirsExist(dirs: string[]) {
-  for (const dir of dirs) {
-    stat(dir).then((stats) => {
-      if (!stats.isDirectory()) {
-        throw new Error(`The path ${dir} is not a directory`);
-      }
-    });
-  }
-}
+import { Augmentation } from '../types';
 
 // augmentateV4('./data')
-
-type Datum = {
+export type Datum = {
   imageName: string;
   image: Image;
   bbox: number[][];
   augmentation: Augmentation;
 };
-function newDatum({
+export function newDatum({
   imageName,
   bbox,
   image, //original image
@@ -62,7 +50,7 @@ function newDatum({
       };
       break;
     default:
-      throw new Error(`Augmentation ${augmentation} not supported`);
+      throw new Error('augmentation not supported');
   }
   return {
     newImage: result.newImage,
@@ -70,28 +58,3 @@ function newDatum({
     newImageName: `${augmentation}_${imageName}`,
   };
 }
-
-async function getDataDirectories(baseDirectoryPath: string) {
-  let dataDirectories = (
-    await readdir(baseDirectoryPath, {
-      withFileTypes: true,
-    })
-  )
-    .filter((d) => d.isDirectory())
-    .map((x) => join(baseDirectoryPath, x.name));
-
-  if (dataDirectories.length === 0) {
-    dataDirectories = [baseDirectoryPath];
-  }
-  return dataDirectories;
-}
-
-export function parseYolov4Annotation(
-  annotation: string,
-): [string, number[][]] {
-  const [imageName, ...labels] = annotation.split(' ');
-  const numbericLabels = labels.map((l) => l.split(',').map(Number.parseFloat));
-  return [imageName, numbericLabels];
-}
-
-export { checkDirsExist, newDatum, getDataDirectories };
