@@ -55,13 +55,14 @@ export async function augmentateV4(
         await writeImage(join(outputDirectory, newImageName), newImage, {
           recursive: true,
         });
-        writeStream.write(completeAnnotation);
+        writeStream.write(`${completeAnnotation}`);
       }
 
       // write original image and annotation
       await writeImage(join(outputDirectory, imageName), image, {
         recursive: true,
       });
+      writeStream.write(`${annotation}\n`);
     }
 
     writeStream.close();
