@@ -5,11 +5,13 @@
 [![Test coverage][codecov-image]][codecov-url]
 [![npm download][download-image]][download-url]
 
-Input a dataset, obtain them augmentated. This is still a work in progress.
+Input a dataset, obtain them augmentated. **This is still a work in progress.**
 
 ## Installation
 
-`$ npm i yolo-augment`
+```bash
+npm i yolo-augment
+```
 
 ## Usage
 
@@ -19,13 +21,13 @@ import { augmentV4 } from 'yolo-augment';
 augmentV4(pathToDatasetFolder);
 ```
 
-## License
+-----------------------
 
 [MIT](./LICENSE)
 
 [npm-image]: https://img.shields.io/npm/v/yolo-augment.svg
 [npm-url]: https://www.npmjs.com/package/yolo-augment
-[ci-image]: https://github.com/santimirandarp/yolo-augment/workflows/Node.js%20CI/badge.svg?branch=main
+[ci-image]: https://github.com/santimirandarp/yolo-augment/workflows/Node.js%20CI/badge.svg
 [ci-url]: https://github.com/santimirandarp/yolo-augment/actions?query=workflow%3A%22Node.js+CI%22
 [codecov-image]: https://img.shields.io/codecov/c/github/santimirandarp/yolo-augment.svg
 [codecov-url]: https://codecov.io/gh/santimirandarp/yolo-augment
