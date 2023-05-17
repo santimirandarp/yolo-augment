@@ -21,6 +21,19 @@ import { augmentV4 } from 'yolo-augment';
 augmentV4(pathToDatasetFolder);
 ```
 
+
+## ToDos
+
+(always with the corresponding test)
+
+Add more augmentation types like:
+
+* scale (positive and negative)
+* blur
+* Etc
+
+Most are straight forward operations in the image library! But labels need careful update.
+ 
 -----------------------
 
 [MIT](./LICENSE)
