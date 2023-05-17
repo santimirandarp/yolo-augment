@@ -36,6 +36,10 @@ Add more augmentation types like:
 Always with the corresponding test.
 
 Most are straight forward operations in the image library! But labels need careful update.
+
+## Potential additions
+
+* Filters (by number of boxes for example, using fs.unlink to remove files and annotations that do not comply.)
  
 -----------------------
 
