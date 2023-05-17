@@ -4,8 +4,7 @@ import { join, basename } from 'node:path';
 import { write as writeImage, read } from 'image-js';
 
 import type { AugmentateOptions } from './types';
-import { checkDirsExist } from './utils/checkDirsExist';
-import { checkFilesExist } from './utils/checkFilesExist';
+import { checkPathExist } from './utils/checkPathExist';
 import { getDataDirectories } from './utils/getDataDirectories';
 import { newDatum } from './utils/newDatum';
 import parseYoloV4Annotation from './utils/parseYoloV4Annotation';
@@ -23,25 +22,23 @@ export async function augmentateV4(
   baseOutputDirectory: string,
   options: Partial<AugmentateOptions> = {},
 ) {
-  await checkDirsExist([baseDirectoryPath, baseOutputDirectory]);
+  await checkPathExist(baseDirectoryPath, 'directory');
 
   const { augmentations = ['rc90', 'rac90', 'r180'] } = options;
 
   const dataDirectories = await getDataDirectories(baseDirectoryPath);
   for (const inputDirectory of dataDirectories) {
     const outputDirectory = join(baseOutputDirectory, basename(inputDirectory));
-    try{
-      await checkDirsExist([outputDirectory]);
+    try {
+      await checkPathExist([outputDirectory], 'directory');
     } catch (e) {
-      await mkdir(outputDirectory);
+      await mkdir(outputDirectory, { recursive: true });
     }
     const streamFrom = join(inputDirectory, '_annotations.txt');
 
-    await checkFilesExist([streamFrom]);
-
     const streamTo = join(outputDirectory, '_new_annotations.txt');
 
-    const readStream = (await open(streamFrom, 'r')).readLines();
+    const readStream = (await open(streamFrom, 'r+')).readLines();
     const writeStream = (await open(streamTo, 'w')).createWriteStream({
       encoding: 'utf8',
     });
