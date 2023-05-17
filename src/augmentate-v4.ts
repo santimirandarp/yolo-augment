@@ -1,4 +1,4 @@
-import { open, copyFile } from 'node:fs/promises';
+import { mkdir, open, copyFile } from 'node:fs/promises';
 import { join, basename } from 'node:path';
 
 import { write as writeImage, read } from 'image-js';
@@ -30,6 +30,11 @@ export async function augmentateV4(
   const dataDirectories = await getDataDirectories(baseDirectoryPath);
   for (const inputDirectory of dataDirectories) {
     const outputDirectory = join(baseOutputDirectory, basename(inputDirectory));
+    try{
+      await checkDirsExist([outputDirectory]);
+    } catch (e) {
+      await mkdir(outputDirectory);
+    }
     const streamFrom = join(inputDirectory, '_annotations.txt');
 
     await checkFilesExist([streamFrom]);
