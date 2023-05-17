@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/santimirandarp/yolo-augment/compare/v1.1.0...v1.1.1) (2023-05-17)
+
+
+### Bug Fixes
+
+* error in rotation ([c31d2e9](https://github.com/santimirandarp/yolo-augment/commit/c31d2e9807bd711fee5087ef845ec0d2549cc112))
+
 ## [1.1.0](https://github.com/santimirandarp/yolo-augment/compare/v1.0.0...v1.1.0) (2023-05-17)
 
 
