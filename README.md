@@ -9,7 +9,7 @@ Input a dataset, obtain them augmentated. **This is still a work in progress.**
 
 ## Installation
 
-```bash
+```shell
 npm i yolo-augment
 ```
 
