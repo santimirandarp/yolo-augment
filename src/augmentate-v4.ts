@@ -24,8 +24,12 @@ export async function augmentateV4(
 ) {
   await checkPathExist(baseDirectoryPath, 'directory');
 
-  const { augmentations = ['rc90', 'rac90', 'r180'] } = options;
+  let { augmentations = ['rc90', 'rac90', 'r180'] } = options;
 
+  if (options.random) {
+    const randomIndex = Math.floor(Math.random() * augmentations.length);
+    augmentations = [augmentations[randomIndex]];
+  }
   const dataDirectories = await getDataDirectories(baseDirectoryPath);
   for (const inputDirectory of dataDirectories) {
     const outputDirectory = join(baseOutputDirectory, basename(inputDirectory));
