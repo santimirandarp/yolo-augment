@@ -48,8 +48,10 @@ export async function augmentateV4(
       const [imageName, bbox] = parseYoloV4Annotation(annotation);
       const image = await read(join(inputDirectory, imageName));
       if (options.random) {
-        const randomIndex = Math.floor(Math.random() * augmentationsCopy.length);
-        augmentations = [augmentations[randomIndex]];
+        const randomIndex = Math.floor(
+          Math.random() * augmentationsCopy.length,
+        );
+        augmentations = [augmentationsCopy[randomIndex]];
       }
 
       // do not duplicate augmentations.
