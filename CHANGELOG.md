@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/santimirandarp/yolo-augment/compare/v1.1.1...v1.2.0) (2023-05-19)
+
+
+### Features
+
+* pick random augmentation ([4794401](https://github.com/santimirandarp/yolo-augment/commit/4794401a9af332cfe3016f0450cdba7e2c4acef4))
+
+
+### Bug Fixes
+
+* augmentation ([72f6dc4](https://github.com/santimirandarp/yolo-augment/commit/72f6dc4fe874619f7f97d51436728f5014339b4a))
+
 ## [1.1.1](https://github.com/santimirandarp/yolo-augment/compare/v1.1.0...v1.1.1) (2023-05-17)
 
 
