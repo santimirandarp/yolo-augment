@@ -25,11 +25,8 @@ export async function augmentateV4(
   await checkPathExist(baseDirectoryPath, 'directory');
 
   let { augmentations = ['rc90', 'rac90', 'r180'] } = options;
+  const augmentationsCopy = [...augmentations];
 
-  if (options.random) {
-    const randomIndex = Math.floor(Math.random() * augmentations.length);
-    augmentations = [augmentations[randomIndex]];
-  }
   const dataDirectories = await getDataDirectories(baseDirectoryPath);
   for (const inputDirectory of dataDirectories) {
     const outputDirectory = join(baseOutputDirectory, basename(inputDirectory));
@@ -50,6 +47,10 @@ export async function augmentateV4(
     for await (const annotation of readStream) {
       const [imageName, bbox] = parseYoloV4Annotation(annotation);
       const image = await read(join(inputDirectory, imageName));
+      if (options.random) {
+        const randomIndex = Math.floor(Math.random() * augmentationsCopy.length);
+        augmentations = [augmentations[randomIndex]];
+      }
 
       // do not duplicate augmentations.
       for (const augmentation of new Set(augmentations)) {
