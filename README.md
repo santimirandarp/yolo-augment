@@ -24,11 +24,8 @@ augmentV4(pathToDatasetFolder);
 
 ## ToDos
 
-* Add a website to visualize the operations in a single image (make a `demo/` folder at the root level and use **vite** to run a server)
-
-## Potential additions
-
-* Filters by number of boxes, using `fs.unlink` to remove non-passing files and annotations.
+* Website
+* Filters by operations on boxes, using `fs.unlink` to remove non-passing files and annotations.
  
 -----------------------
 
