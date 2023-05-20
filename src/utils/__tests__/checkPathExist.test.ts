@@ -18,12 +18,10 @@ describe('checkDirsExist', () => {
   });
   it('should throw error', async () => {
     await expect(
-      checkPathExist(
-        [
-          './src/utils/__tests__/checkFilesDontExist.test.ts',
-          './src/utils/__tests__/checkFilesExist.test.ts',
-        ],
-      ),
+      checkPathExist([
+        './src/utils/__tests__/checkFilesDontExist.test.ts',
+        './src/utils/__tests__/checkFilesExist.test.ts',
+      ]),
     ).rejects.toThrowError();
   });
 });
