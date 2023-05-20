@@ -1,5 +1,7 @@
-import { mkdir, open, copyFile } from 'node:fs/promises';
+import { createReadStream, createWriteStream } from 'node:fs';
+import { mkdir, copyFile } from 'node:fs/promises';
 import { join, basename } from 'node:path';
+import { createInterface } from 'node:readline';
 
 import { write as writeImage, read } from 'image-js';
 
@@ -24,10 +26,12 @@ export async function augmentateV4(
 ) {
   await checkPathExist(baseDirectoryPath, 'directory');
 
-  let { augmentations = ['rc90', 'rac90', 'r180'] } = options;
-  const augmentationsCopy = [...augmentations];
+  const { augmentations = ['rc90', 'rac90', 'r180'] } = options;
+  let augmentationsCopy = [...augmentations];
 
-  const dataDirectories = await getDataDirectories(baseDirectoryPath);
+  let dataDirectories = await getDataDirectories(baseDirectoryPath);
+  if (dataDirectories.length === 0) dataDirectories.push(baseDirectoryPath);
+
   for (const inputDirectory of dataDirectories) {
     const outputDirectory = join(baseOutputDirectory, basename(inputDirectory));
     try {
@@ -37,11 +41,14 @@ export async function augmentateV4(
     }
     const streamFrom = join(inputDirectory, '_annotations.txt');
 
-    const streamTo = join(outputDirectory, '_new_annotations.txt');
+    const streamTo = join(outputDirectory, '_annotations.txt');
 
-    const readStream = (await open(streamFrom, 'r+')).readLines();
-    const writeStream = (await open(streamTo, 'w')).createWriteStream({
-      encoding: 'utf8',
+    const readStream = createInterface({
+      input: createReadStream(streamFrom, { encoding: 'utf-8' }),
+      crlfDelay: Infinity,
+    });
+    const writeStream = createWriteStream(streamTo, {
+      encoding: 'utf-8',
     });
 
     for await (const annotation of readStream) {
@@ -51,11 +58,11 @@ export async function augmentateV4(
         const randomIndex = Math.floor(
           Math.random() * augmentationsCopy.length,
         );
-        augmentations = [augmentationsCopy[randomIndex]];
+        augmentationsCopy = [augmentations[randomIndex]];
       }
 
       // do not duplicate augmentations.
-      for (const augmentation of new Set(augmentations)) {
+      for (const augmentation of augmentationsCopy) {
         const datum = { bbox, image, augmentation, imageName };
 
         const { newImageName, newImage, newAnnotation } = newDatum(datum);

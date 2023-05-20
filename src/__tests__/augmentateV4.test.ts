@@ -1,7 +1,7 @@
 import { readdir } from 'node:fs/promises';
 import { join } from 'path';
 
-import { augmentateV4 } from '../augmentate-v4';
+import { augmentateV4 } from '../augmentateV4';
 
 describe('augmentateV4', () => {
   it('should work with a single dir', async () => {

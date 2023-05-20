@@ -49,6 +49,15 @@ export function newDatum({
         ),
       };
       break;
+    case 'blur':
+      result = {
+        newImage: image.blur({
+          height: 3,
+          width: 3,
+        }),
+        newNumericLabels: bbox.map((datum) => datum.join(',')),
+      };
+      break;
     default:
       throw new Error('augmentation not supported');
   }
