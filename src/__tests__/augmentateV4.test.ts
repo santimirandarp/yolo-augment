@@ -16,7 +16,10 @@ describe('augmentateV4', () => {
     const input = join(__dirname, './data');
     const out = join(__dirname, './outAll');
 
-    await augmentateV4(input, out);
+    await augmentateV4(input, out, {
+      augmentations: ['blur', 'r180', 'rc90'],
+      random: true,
+    });
     const result = await readdir(out);
     expect(result).toHaveLength(2);
   });

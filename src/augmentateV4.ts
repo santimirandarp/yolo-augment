@@ -24,7 +24,7 @@ export async function augmentateV4(
   baseOutputDirectory: string,
   options: Partial<AugmentateOptions> = {},
 ) {
-  await checkPathExist(baseDirectoryPath, 'directory');
+  await checkPathExist(baseDirectoryPath);
 
   const { augmentations = ['rc90', 'rac90', 'r180'] } = options;
   let augmentationsCopy = [...augmentations];
@@ -35,7 +35,7 @@ export async function augmentateV4(
   for (const inputDirectory of dataDirectories) {
     const outputDirectory = join(baseOutputDirectory, basename(inputDirectory));
     try {
-      await checkPathExist([outputDirectory], 'directory');
+      await checkPathExist([outputDirectory]);
     } catch (e) {
       await mkdir(outputDirectory, { recursive: true });
     }
