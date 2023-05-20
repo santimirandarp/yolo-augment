@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/santimirandarp/yolo-augment/compare/v1.2.0...v1.3.0) (2023-05-20)
+
+
+### Features
+
+* support more node versions ([de2a59f](https://github.com/santimirandarp/yolo-augment/commit/de2a59f8fd526e69ecc84c23ea44c06db0689859))
+
 ## [1.2.0](https://github.com/santimirandarp/yolo-augment/compare/v1.1.1...v1.2.0) (2023-05-19)
 
 
