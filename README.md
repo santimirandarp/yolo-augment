@@ -24,22 +24,11 @@ augmentV4(pathToDatasetFolder);
 
 ## ToDos
 
-
 * Add a website to visualize the operations in a single image (make a `demo/` folder at the root level and use **vite** to run a server)
-
-Add more augmentation types like:
-
-* scale (positive and negative)
-* blur
-* Etc
-
-Always with the corresponding test.
-
-Most are straight forward operations in the image library! But labels need careful update.
 
 ## Potential additions
 
-* Filters (by number of boxes for example, using fs.unlink to remove files and annotations that do not comply.)
+* Filters by number of boxes, using `fs.unlink` to remove non-passing files and annotations.
  
 -----------------------
 
