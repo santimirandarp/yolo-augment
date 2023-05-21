@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/santimirandarp/yolo-augment/compare/v1.3.0...v2.0.0) (2023-05-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* function name from augmentate to augment which is the correct word.
+
+### Bug Fixes
+
+* function name from augmentate to augment which is the correct word. ([aba3f50](https://github.com/santimirandarp/yolo-augment/commit/aba3f509f1d1775b05b386de94df9fb303401c47))
+
 ## [1.3.0](https://github.com/santimirandarp/yolo-augment/compare/v1.2.0...v1.3.0) (2023-05-20)
 
 
