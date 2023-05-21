@@ -1,6 +1,6 @@
 {
   "name": "yolo-augment",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "description": "Give images and labels, get them augmentated.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
