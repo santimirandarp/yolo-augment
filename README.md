@@ -16,9 +16,9 @@ npm i yolo-augment
 ## Usage
 
 ```js
-import { augmentateV4 } from 'yolo-augment';
+import { augmentV4 } from 'yolo-augment';
 
-augmentateV4(pathToDatasetFolder).then(()=>console.log("done"))
+augmentV4(pathToDatasetFolder).then(()=>console.log("done"))
 ```
 
 
