@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/santimirandarp/yolo-augment/compare/v2.0.0...v2.0.1) (2023-05-21)
+
+
+### Miscellaneous Chores
+
+* release 2.0.1 ([5efb9f3](https://github.com/santimirandarp/yolo-augment/commit/5efb9f3411819db1359cbd202d30f59ad3e781a4))
+
 ## [2.0.0](https://github.com/santimirandarp/yolo-augment/compare/v1.3.0...v2.0.0) (2023-05-21)
 
 
