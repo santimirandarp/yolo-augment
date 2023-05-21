@@ -1,1 +1,1 @@
-export * from './augmentateV4';
+export * from './augmentV4';

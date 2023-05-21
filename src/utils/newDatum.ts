@@ -2,7 +2,7 @@ import { Image } from 'image-js';
 
 import { Augmentation } from '../types';
 
-// augmentateV4('./data')
+// augmentV4('./data')
 export type Datum = {
   imageName: string;
   image: Image;

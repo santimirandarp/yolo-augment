@@ -19,7 +19,7 @@ import parseYoloV4Annotation from './utils/parseYoloV4Annotation';
  * @param options - Options to augmentate the data
  *
  */
-export async function augmentateV4(
+export async function augmentV4(
   baseDirectoryPath: string,
   baseOutputDirectory: string,
   options: Partial<AugmentateOptions> = {},
