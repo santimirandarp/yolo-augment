@@ -1,7 +1,5 @@
-import { createReadStream, createWriteStream } from 'node:fs';
 import { mkdir } from 'node:fs/promises';
-import { relative, resolve, join, basename } from 'node:path';
-import { createInterface } from 'node:readline';
+import { resolve, join } from 'node:path';
 
 import { write as writeImage, read } from 'image-js';
 
@@ -11,8 +9,10 @@ import {
   getDataDirectories,
   Datum,
   parseYoloV4Annotation,
+  writeClassesFile,
+  makeOutputDirectoryFromDifference,
 } from './utils';
-import { writeClassesFile } from './utils/writeClassesFile';
+import { makeReadWriteStreams } from './utils/makeReadWriteStream';
 
 /**
  * Transform labels and images at `baseDirectoryPath` and output them to `baseOutputDirectory`
@@ -38,10 +38,12 @@ export async function augmentV4(
   let dataDirectories = await getDataDirectories(baseDirectoryPath);
   if (dataDirectories.length === 0) dataDirectories.push(baseDirectoryPath);
 
-  for (const inputDirectory of dataDirectories) {
-    let difference = relative(baseDirectoryPath, inputDirectory);
-    if (difference === '') difference = basename(inputDirectory);
-    const outputDirectory = join(baseOutputDirectory, difference);
+  for (const annotationDirectory of dataDirectories) {
+    const outputDirectory = makeOutputDirectoryFromDifference(
+      baseDirectoryPath,
+      baseOutputDirectory,
+      annotationDirectory,
+    );
     try {
       await checkPathExist([outputDirectory]);
     } catch (e) {
@@ -49,19 +51,14 @@ export async function augmentV4(
     }
 
     // one line in, and `augmentations.length+1` lines out.
-    const streamFrom = join(inputDirectory, '_annotations.txt');
-    const streamTo = join(outputDirectory, '_annotations.txt');
-    const readStream = createInterface({
-      input: createReadStream(streamFrom, { encoding: 'utf-8' }),
-      crlfDelay: Infinity,
-    });
-    const writeStream = createWriteStream(streamTo, {
-      encoding: 'utf-8',
-    });
+    const { readStream, writeStream } = makeReadWriteStreams(
+      annotationDirectory,
+      outputDirectory,
+    );
 
     for await (const annotation of readStream) {
       const [imageName, bbox] = parseYoloV4Annotation(annotation);
-      const image = await read(join(inputDirectory, imageName));
+      const image = await read(join(annotationDirectory, imageName));
       if (options.random) {
         const randomIndex = Math.floor(
           Math.random() * augmentationsCopy.length,
@@ -89,6 +86,6 @@ export async function augmentV4(
 
     writeStream.close();
     readStream.close();
-    await writeClassesFile(inputDirectory, outputDirectory, options);
+    await writeClassesFile(annotationDirectory, outputDirectory, options);
   }
 }

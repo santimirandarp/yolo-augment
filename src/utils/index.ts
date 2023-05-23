@@ -2,3 +2,5 @@ export * from './checkPathExist';
 export * from './getDataDirectories';
 export * from './Datum';
 export * from './parseYoloV4Annotation';
+export * from './makeOutputDirectoryFromDifference';
+export * from './writeClassesFile';
