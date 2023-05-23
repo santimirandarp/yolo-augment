@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2](https://github.com/santimirandarp/yolo-augment/compare/v2.0.1...v2.0.2) (2023-05-23)
+
+
+### Bug Fixes
+
+* use path.relative to get the output dir ([bf5c38f](https://github.com/santimirandarp/yolo-augment/commit/bf5c38fcc978a9abff9f10600689b8b508abf42c))
+
 ## [2.0.1](https://github.com/santimirandarp/yolo-augment/compare/v2.0.0...v2.0.1) (2023-05-21)
 
 
