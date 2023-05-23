@@ -1,10 +1,14 @@
 {
   "name": "yolo-augment",
   "version": "2.0.2",
-  "description": "Give images and labels, get them augmentated.",
+  "description": "Give images and labels, get them augmented.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
-  "keywords": [],
+  "keywords": [
+    "augment dataset",
+    "yolox",
+    "yolo"
+  ],
   "author": "Santi Miranda",
   "license": "MIT",
   "files": [
@@ -12,17 +16,17 @@
     "lib"
   ],
   "scripts": {
-    "check-types": "tsc --noEmit",
+    "check-types": "tsc --noEmit --project .config/tsconfig.json",
     "clean": "rimraf lib",
-    "eslint": "eslint src --cache",
+    "eslint": "eslint src --cache --config .config/.eslintrc.json",
     "eslint-fix": "npm run eslint -- --fix",
     "prepack": "npm run tsc",
-    "prettier": "prettier --check src",
-    "prettier-write": "prettier --write src",
+    "prettier": "prettier --check src --config .config/.prettierrc.json",
+    "prettier-write": "prettier --write src --config .config/.prettierrc.json",
     "test": "npm run test-only && npm run eslint && npm run prettier && npm run check-types",
-    "test-only": "vitest run --coverage",
+    "test-only": "vitest run --coverage --config .config/vite.config.ts",
     "tsc": "npm run clean && npm run tsc-cjs",
-    "tsc-cjs": "tsc --project tsconfig.cjs.json"
+    "tsc-cjs": "tsc --project .config/tsconfig.cjs.json"
   },
   "repository": {
     "type": "git",

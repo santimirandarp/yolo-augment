@@ -1,6 +1,6 @@
-import { createInterface } from 'node:readline';
 import { createReadStream, createWriteStream } from 'node:fs';
 import { join } from 'node:path';
+import { createInterface } from 'node:readline';
 
 export function makeReadWriteStreams(
   inputDirectory: string,
