@@ -10,6 +10,6 @@ describe('getDataDirectories', () => {
   });
   it('Two data directories', async () => {
     const result = await getDataDirectories(data);
-    expect(result).toHaveLength(2);
+    expect(result).toHaveLength(3);
   });
 });

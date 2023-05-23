@@ -8,12 +8,10 @@ export async function getDataDirectories(
   const baseDirectory = await opendir(baseDirectoryPath);
 
   for await (const dirent of baseDirectory) {
+    const name = dirent.name;
     if (dirent.isDirectory()) {
-      await getDataDirectories(
-        join(baseDirectoryPath, dirent.name),
-        dataDirectories,
-      );
-    } else if (dirent.name === '_annotations.txt') {
+      await getDataDirectories(join(baseDirectoryPath, name), dataDirectories);
+    } else if (name === '_annotations.txt') {
       dataDirectories.push(baseDirectoryPath);
     }
   }

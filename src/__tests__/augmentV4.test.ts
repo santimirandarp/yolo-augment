@@ -21,6 +21,6 @@ describe('augmentV4', () => {
       random: true,
     });
     const result = await readdir(out);
-    expect(result).toHaveLength(2);
+    expect(result).toHaveLength(3);
   });
 });

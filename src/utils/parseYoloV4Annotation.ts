@@ -1,4 +1,4 @@
-export default function parseYoloV4Annotation(
+export function parseYoloV4Annotation(
   annotation: string,
 ): [string, number[][]] {
   const [imageName, ...labels] = annotation.split(' ');

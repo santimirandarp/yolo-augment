@@ -1,4 +1,4 @@
-import parseYoloV4Annotation from '../parseYoloV4Annotation';
+import { parseYoloV4Annotation } from '../parseYoloV4Annotation';
 
 describe('parseYoloV4Annotation', () => {
   it('should work', () => {

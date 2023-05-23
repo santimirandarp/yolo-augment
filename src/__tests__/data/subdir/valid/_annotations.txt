@@ -1,0 +1,3 @@
+streamlit_selfie_2_jpeg_jpg.rf.2138a2c77aa5e1abbabc0c4cf02f3a92.jpg 245,306,331.5,392,2
+streamlit_selfie_jpeg_jpg.rf.89098783def1a32ae7f6134b38320249.jpg 260,261,344,311,2
+photo_2021-05-03-19-10-20_jpeg_jpg.rf.4c3818d41d9e01a2c519eecd9d79528e.jpg 106,279,141,306,0
