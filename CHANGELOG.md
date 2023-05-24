@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.3](https://github.com/santimirandarp/yolo-augment/compare/v2.0.2...v2.0.3) (2023-05-24)
+
+
+### config
+
+* error in the library path ([c9de9d7](https://github.com/santimirandarp/yolo-augment/commit/c9de9d7fcd455d5f8b45ccfc5a345d14c2953704))
+
 ## [2.0.2](https://github.com/santimirandarp/yolo-augment/compare/v2.0.1...v2.0.2) (2023-05-23)
 
 
