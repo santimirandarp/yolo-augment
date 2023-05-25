@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.4](https://github.com/santimirandarp/yolo-augment/compare/v2.0.3...v2.0.4) (2023-05-24)
+
+
+### Bug Fixes
+
+* select a random index ([c699f10](https://github.com/santimirandarp/yolo-augment/commit/c699f1006fcc090993f67eee73d66c8461015b94))
+
 ## [2.0.3](https://github.com/santimirandarp/yolo-augment/compare/v2.0.2...v2.0.3) (2023-05-24)
 
 
