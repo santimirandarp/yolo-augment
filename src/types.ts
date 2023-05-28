@@ -24,4 +24,5 @@ export type AugmentOptions = {
    * Only used if the `_classes.txt` does not exist.
    */
   classNames: string[];
+  filterFromBBox: (bbox: number[][]) => boolean;
 };

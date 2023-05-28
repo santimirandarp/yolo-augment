@@ -16,18 +16,16 @@ npm i yolo-augment
 ## Usage
 
 ```js
-import { augmentV4 } from 'yolo-augment';
+import { augmentV4 } from "yolo-augment";
 
-augmentV4(pathToDatasetFolder).then(()=>console.log("done"))
+augmentV4(pathToDatasetFolder).then(() => console.log("done"));
 ```
-
 
 ## ToDos
 
-* Website
-* Filters by operations on boxes, using `fs.unlink` to remove non-passing files and annotations.
- 
------------------------
+- Website
+
+---
 
 [MIT](./LICENSE)
 
