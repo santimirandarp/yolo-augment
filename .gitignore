@@ -120,3 +120,4 @@ lib
 src/__tests__/out
 src/__tests__/outAll
 .vscode
+package-lock.json
