@@ -1,51 +1,60 @@
-import { mkdir } from 'node:fs/promises';
-import { resolve, join } from 'node:path';
+import { mkdir } from "node:fs/promises";
+import { resolve, join, relative } from "node:path";
+import { type WriteStream } from "node:fs";
 
-import { write as writeImage, read } from 'image-js';
+import { type Image, write as writeImage, read } from "image-js";
 
-import type { AugmentOptions } from './types';
+import type { Augmentation, AugmentOptions } from "./types";
 import {
   checkPathExist,
   getDataDirectories,
   Datum,
   parseYoloV4Annotation,
   writeClassesFile,
-  makeOutputDirectoryFromDifference,
-} from './utils';
-import { makeReadWriteStreams } from './utils/makeReadWriteStream';
+} from "./utils";
+import { makeReadWriteStreams } from "./utils/makeReadWriteStream";
+import { getAugmentations } from "./utils/getAugmentations";
 
 /**
- * Transform labels and images at `baseDirectoryPath` and output them to `baseOutputDirectory`
- * @param baseDirectoryPath - The directory containing the images and labels
- * (alternatively it can be a parent directory containing multiple directories with images and labels)
- * @param baseOutputDirectory - The directory to output the new data to (images and labels)
+ * Recursively finds `_annotations.txt` from `startSearchFrom` and outputs to {@link AugmentOptions["outDir"] }
+ * @param startSearchFrom - The directory to start to search for images and labels.
  * @param options - Options to augment the data
  *
  */
 export async function augmentV4(
-  baseDirectoryPath: string,
-  baseOutputDirectory: string,
-  options: Partial<AugmentOptions> = {},
+  startSearchFrom: string,
+  options: Partial<AugmentOptions> = {}
 ) {
-  baseDirectoryPath = resolve(baseDirectoryPath);
-  baseOutputDirectory = resolve(baseOutputDirectory);
+  const {
+    augmentations = ["rac90", "r180", "rc90"],
+    outDir = "./augmentedData",
+    random = false,
+    classNames = ["faces"],
+    outOriginal = true,
+  } = options;
+
+  const baseDirectoryPath = resolve(startSearchFrom);
+  const baseOutputDirectory = resolve(outDir);
 
   await checkPathExist(baseDirectoryPath);
 
-  const { augmentations = ['rc90', 'rac90', 'r180'] } = options;
-  let augmentationsCopy = [...augmentations];
+  const deDuplicatedAugmentations = getAugmentations(
+    augmentations,
+    outOriginal
+  );
+  const { newAugmentations } = deDuplicatedAugmentations;
+  const newAugmentationsLength = newAugmentations.length;
 
   let dataDirectories = await getDataDirectories(baseDirectoryPath);
   if (dataDirectories.length === 0) dataDirectories.push(baseDirectoryPath);
 
   for (const annotationDirectory of dataDirectories) {
-    const outputDirectory = makeOutputDirectoryFromDifference(
-      baseDirectoryPath,
+    const outputDirectory = join(
       baseOutputDirectory,
-      annotationDirectory,
+      relative(baseDirectoryPath, annotationDirectory)
     );
     try {
-      await checkPathExist([outputDirectory]);
+      await checkPathExist(outputDirectory);
     } catch (e) {
       await mkdir(outputDirectory, { recursive: true });
     }
@@ -53,37 +62,62 @@ export async function augmentV4(
     // one line in, and `augmentations.length+1` lines out.
     const { readStream, writeStream } = makeReadWriteStreams(
       annotationDirectory,
-      outputDirectory,
+      outputDirectory
     );
 
     for await (const annotation of readStream) {
       const [imageName, bbox] = parseYoloV4Annotation(annotation);
       const image = await read(join(annotationDirectory, imageName));
-      if (options.random) {
-        const randomIndex = Math.floor(Math.random() * augmentations.length);
-        augmentationsCopy = [augmentations[randomIndex]];
+      if (random) {
+        const randomIndex = Math.floor(Math.random() * newAugmentationsLength);
+        writeData(
+          imageName,
+          bbox,
+          image,
+          newAugmentations[randomIndex],
+          outputDirectory,
+          writeStream
+        );
       }
 
-      for (const augmentation of new Set(augmentationsCopy)) {
-        const { newImageName, newImage, newAnnotation } = new Datum(
+      for (const augmentation of newAugmentations) {
+        writeData(
           imageName,
           bbox,
           image,
           augmentation,
+          outputDirectory,
+          writeStream
         );
-        const completeAnnotation = `${newImageName} ${newAnnotation}\n`;
-
-        await writeImage(join(outputDirectory, newImageName), newImage);
-        writeStream.write(`${completeAnnotation}`);
       }
-
-      // write original image as well
-      await writeImage(join(outputDirectory, imageName), image);
-      writeStream.write(`${annotation}\n`);
     }
 
     writeStream.close();
     readStream.close();
-    await writeClassesFile(annotationDirectory, outputDirectory, options);
+    await writeClassesFile(annotationDirectory, outputDirectory, classNames);
   }
+}
+
+/**
+ *
+ * only intended to reduce code duplication in {@link augmentV4}
+ */
+async function writeData(
+  imageName: string,
+  bbox: number[][],
+  image: Image,
+  augmentation: Augmentation,
+  outputDirectory: string,
+  writeStream: WriteStream
+) {
+  const { newImageName, newImage, newAnnotation } = new Datum(
+    imageName,
+    bbox,
+    image,
+    augmentation
+  );
+  const completeAnnotation = `${newImageName} ${newAnnotation}\n`;
+
+  await writeImage(join(outputDirectory, newImageName), newImage);
+  writeStream.write(`${completeAnnotation}`);
 }
