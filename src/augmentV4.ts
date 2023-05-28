@@ -1,19 +1,19 @@
-import { type WriteStream } from 'node:fs';
-import { mkdir } from 'node:fs/promises';
-import { resolve, join, relative } from 'node:path';
+import { type WriteStream } from "node:fs";
+import { mkdir } from "node:fs/promises";
+import { resolve, join, relative } from "node:path";
 
-import { type Image, write as writeImage, read } from 'image-js';
+import { type Image, write as writeImage, read } from "image-js";
 
-import type { Augmentation, AugmentOptions } from './types';
+import type { Augmentation, AugmentOptions } from "./types";
 import {
   checkPathExist,
   getDataDirectories,
   Datum,
   parseYoloV4Annotation,
   writeClassesFile,
-} from './utils';
-import { getAugmentations } from './utils/getAugmentations';
-import { makeReadWriteStreams } from './utils/makeReadWriteStream';
+} from "./utils";
+import { getAugmentations } from "./utils/getAugmentations";
+import { makeReadWriteStreams } from "./utils/makeReadWriteStream";
 
 /**
  * Recursively finds `_annotations.txt` from `startSearchFrom` and outputs to {@link AugmentOptions["outDir"] }
@@ -23,13 +23,13 @@ import { makeReadWriteStreams } from './utils/makeReadWriteStream';
  */
 export async function augmentV4(
   startSearchFrom: string,
-  options: Partial<AugmentOptions> = {},
+  options: Partial<AugmentOptions> = {}
 ) {
   const {
-    augmentations = ['rac90', 'r180', 'rc90'],
-    outDir = './augmentedData',
+    augmentations = ["rac90", "r180", "rc90"],
+    outDir = "./augmentedData",
     random = false,
-    classNames = ['faces'],
+    classNames = ["faces"],
     outOriginal = true,
   } = options;
 
@@ -40,18 +40,22 @@ export async function augmentV4(
 
   const deDuplicatedAugmentations = getAugmentations(
     augmentations,
-    outOriginal,
+    outOriginal
   );
   const { newAugmentations } = deDuplicatedAugmentations;
   const newAugmentationsLength = newAugmentations.length;
 
-  let dataDirectories = await getDataDirectories(baseDirectoryPath);
-  if (dataDirectories.length === 0) dataDirectories.push(baseDirectoryPath);
+  const dataDirectories = await getDataDirectories(baseDirectoryPath);
+  if (dataDirectories.length === 0) {
+    throw new Error(
+      `No data directories found in ${baseDirectoryPath}. Please check that the directory is correct and that the data directories are named "_annotations.txt"`
+    );
+  }
 
   for (const annotationDirectory of dataDirectories) {
     const outputDirectory = join(
       baseOutputDirectory,
-      relative(baseDirectoryPath, annotationDirectory),
+      relative(baseDirectoryPath, annotationDirectory)
     );
     try {
       await checkPathExist(outputDirectory);
@@ -62,7 +66,7 @@ export async function augmentV4(
     // one line in, and `augmentations.length+1` lines out.
     const { readStream, writeStream } = makeReadWriteStreams(
       annotationDirectory,
-      outputDirectory,
+      outputDirectory
     );
 
     for await (const annotation of readStream) {
@@ -76,7 +80,7 @@ export async function augmentV4(
           image,
           newAugmentations[randomIndex],
           bbox,
-          writeStream,
+          writeStream
         );
       }
 
@@ -87,7 +91,7 @@ export async function augmentV4(
           image,
           augmentation,
           bbox,
-          writeStream,
+          writeStream
         );
       }
     }
@@ -108,13 +112,13 @@ async function writeData(
   image: Image,
   augmentation: Augmentation,
   bbox: number[][],
-  writeStream: WriteStream,
+  writeStream: WriteStream
 ) {
   const { newImageName, newImage, newAnnotation } = new Datum(
     imageName,
     bbox,
     image,
-    augmentation,
+    augmentation
   );
   const completeAnnotation = `${newImageName} ${newAnnotation}\n`;
 
