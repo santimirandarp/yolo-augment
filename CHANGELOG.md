@@ -1,5 +1,28 @@
 # Changelog
 
+## [3.0.0](https://github.com/santimirandarp/yolo-augment/compare/v2.0.4...v3.0.0) (2023-05-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* use a single input directory and only output as an option
+
+### Features
+
+* add original as case ([a3958a8](https://github.com/santimirandarp/yolo-augment/commit/a3958a8f271cd78029e8e031d560146c33b2c457))
+
+
+### Bug Fixes
+
+* **deps:** fixed version of image-js ([fe608fc](https://github.com/santimirandarp/yolo-augment/commit/fe608fc484d915bdbaf1a3805a0af0225fd527ba))
+* error in the outdir when class is present ([a4b7c9d](https://github.com/santimirandarp/yolo-augment/commit/a4b7c9dc7695178a1c87cbbfa2c63c8312eab684))
+* remove getDataDirectories array mutation ([db387b7](https://github.com/santimirandarp/yolo-augment/commit/db387b7bf4e9cc7f6e27d02fd0229339ba8a3477))
+
+
+### Code Refactoring
+
+* use a single input directory and only output as an option ([10e7ebb](https://github.com/santimirandarp/yolo-augment/commit/10e7ebb973102f8b31058e92d18d8c2eb079ec05))
+
 ## [2.0.4](https://github.com/santimirandarp/yolo-augment/compare/v2.0.3...v2.0.4) (2023-05-24)
 
 
