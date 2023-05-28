@@ -1,4 +1,4 @@
-export type Augmentation = "rc90" | "rac90" | "r180" | "blur" | "original";
+export type Augmentation = 'rc90' | 'rac90' | 'r180' | 'blur' | 'original';
 export type AugmentOptions = {
   /**
    * @default `["rc90", "rac90", "r180"]`

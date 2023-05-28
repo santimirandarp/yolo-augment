@@ -1,4 +1,4 @@
-import { AugmentOptions, Augmentation } from "../types";
+import { Augmentation } from '../types';
 
 /**
  * Adds `original` to the augmentations if `outOriginal` is true.
@@ -10,10 +10,10 @@ import { AugmentOptions, Augmentation } from "../types";
  */
 export function getAugmentations(
   augmentations: Augmentation[],
-  outOriginal: boolean
+  outOriginal: boolean,
 ) {
   const augmentationsCopy = [...augmentations];
-  if (outOriginal) augmentationsCopy.push("original");
+  if (outOriginal) augmentationsCopy.push('original');
 
   const newAugmentations = Array.from(new Set(augmentationsCopy));
   return {
