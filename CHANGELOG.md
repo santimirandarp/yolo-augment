@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/santimirandarp/yolo-augment/compare/v3.0.0...v3.0.1) (2023-05-29)
+
+
+### Bug Fixes
+
+* do not run all if random is true and tests ([4d281a0](https://github.com/santimirandarp/yolo-augment/commit/4d281a0df8adb911cfaaa49aabb0c61efe890451))
+
 ## [3.0.0](https://github.com/santimirandarp/yolo-augment/compare/v2.0.4...v3.0.0) (2023-05-28)
 
 
