@@ -5,7 +5,7 @@
 [![Test coverage][codecov-image]][codecov-url]
 [![npm download][download-image]][download-url]
 
-Input a dataset, obtain them augmentated. **This is still a work in progress.**
+Input a dataset, obtain them augmented. **This is still a work in progress.**
 
 ## Installation
 
