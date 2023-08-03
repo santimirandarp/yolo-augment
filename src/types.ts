@@ -1,5 +1,5 @@
 export type Augmentation = 'rc90' | 'rac90' | 'r180' | 'blur' | 'original';
-export type AugmentOptions = {
+export interface AugmentOptions {
   /**
    * @default `["rc90", "rac90", "r180"]`
    */
@@ -25,4 +25,4 @@ export type AugmentOptions = {
    */
   classNames: string[];
   filterFromBBox: (bbox: number[][]) => boolean;
-};
+}
