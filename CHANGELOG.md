@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.2](https://github.com/santimirandarp/yolo-augment/compare/v3.0.1...v3.0.2) (2023-08-03)
+
+
+### Bug Fixes
+
+* deps and workflows ([c458273](https://github.com/santimirandarp/yolo-augment/commit/c4582736beeec781686336bda149b86ea142b575))
+
 ## [3.0.1](https://github.com/santimirandarp/yolo-augment/compare/v3.0.0...v3.0.1) (2023-05-29)
 
 
